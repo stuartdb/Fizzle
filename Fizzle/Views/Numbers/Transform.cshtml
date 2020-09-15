@@ -1,6 +1,6 @@
 ﻿@model Fizzle.Models.Number
 
-@{    
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -10,12 +10,15 @@
     <h4>Number</h4>
     <hr />
 
+    <h4>You've been auto Fizzled!</h4>
+
     <ul>
-        <li>@Html.DisplayNameFor(model => model.Id): @Html.DisplayFor(model => model.Id)</li>
         <li>@Html.DisplayNameFor(model => model.Initial): @Html.DisplayFor(model => model.Initial)</li>
         <li>@Html.DisplayNameFor(model => model.Transform): @Html.DisplayFor(model => model.Transform)</li>
     </ul>
+
+    <img src="~/img/wow.png" asp-append-version="true">
 </div>
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Numbers" asp-action="Index">List of Numbers</a>
 </div>
