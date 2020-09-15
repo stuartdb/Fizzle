@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Fizzle.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Fizzle.Controllers
 {
@@ -18,15 +19,40 @@ namespace Fizzle.Controllers
         }
 
         // GET: NumbersController
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var all = await _context.Numbers
+                .OrderBy(n => n.Initial)
+                .ToListAsync();
+
+            return View(all);
         }
 
         // GET: NumbersController/Details/5
-        public ActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            return View();
+            var number = await _context.Numbers
+                .FirstOrDefaultAsync(n => n.Id == id);
+
+            ViewData["Title"] = "Details";
+            return View(number);
+        }
+
+        // GET: NumbersController/Transform/10
+        /// <summary>
+        /// Details isn't a very interesting action since it uses the id.        
+        /// Being able to dump a number in the url and see if it's been Fizzle'd is more interesting
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> Transform(int id)
+        {
+            var number = await _context.Numbers
+                .FirstOrDefaultAsync(n => n.Initial == id);
+
+            ViewData["Title"] = "Transform";
+            // Reuse the details view
+            return View("Details", number);
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Fizzle.Data;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,8 +29,9 @@ namespace Fizzle
                 var services = scope.ServiceProvider;
 
                 try
-                {
+                {   
                     var numberContext = services.GetRequiredService<NumberContext>();
+                    // We can ensure the context/database has seeded data on app start
                     numberContext.Initialize();
                 }
                 catch (Exception ex)

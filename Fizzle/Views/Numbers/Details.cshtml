@@ -1,5 +1,20 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model Fizzle.Models.Number
+
+@{    
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<h1>View</h1>
+
+<div>
+    <h4>Number</h4>
+    <hr />
+    <ul>
+        <li>@Html.DisplayNameFor(model => model.Id): @Html.DisplayFor(model => model.Id)</li>
+        <li>@Html.DisplayNameFor(model => model.Initial): @Html.DisplayFor(model => model.Initial)</li>
+        <li>@Html.DisplayNameFor(model => model.Transform): @Html.DisplayFor(model => model.Transform)</li>
+    </ul>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
